@@ -1,0 +1,23 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("POIK HUB", "BloodTheme")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Auto Farm")
+Section:NewToggle("Auto Melee", "Click to Auto Click(Combat Only!)", function(state)
+_G.t = state
+pcall(function()
+    if _G.t then
+        while _G.t do wait()
+            local args = {
+                [1] = "Combat"
+            }
+            
+            game:GetService("ReplicatedStorage").Remotes.Mouse1Combat:FireServer(unpack(args))
+            end
+        end
+    end)
+end)
+local Tab = Window:NewTab("Setting")
+local Section = Tab:NewSection("Close UI")
+Section:NewKeybind("Select Key", "Select Key to Close UI", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end)
